@@ -127,11 +127,8 @@ if __name__ == '__main__':
             print(f"[给自己充电]{chargeBody}")
         else:
             print(f"[领取B币券给自己充电]{biBiQuanBody['message']}")
-    else:
-        print("[领取B币券给自己充电]不是会员！")
 
-    # 大会员积分并兑换大会员卡
-    if vipStatus:
+        # 大会员积分并兑换大会员卡
         vipSignUrl = "https://api.bilibili.com/pgc/activity/score/task/sign"
         vipSignBody = requests.post(url=vipSignUrl, headers=headers).json()
         print(f"[会员签到]{vipSignBody}")
@@ -201,5 +198,8 @@ if __name__ == '__main__':
                                                     "token": prize["token"]},
                                                 headers=headers).json()
                 print(f"[兑换{prize['title']}]{exchangeVipBody}")
+    else:
+        print("[领取B币券给自己充电]不是会员！")
+        print("[大会员积分]不是会员！")
     input('按任意键退出')
     exit(0)
