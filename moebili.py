@@ -10,8 +10,13 @@ moebili云签发行版
 """
 
 if __name__ == '__main__':
-    with open(file="./config.json", mode='r', encoding='utf8') as fp:
-        configDict = json.load(fp=fp)
+    configDict = { 
+        "cookies": {
+            "DedeUserID": "****",
+            "SESSDATA": "****",
+            "bili_jct": "****"
+            }
+        }
     # 构造请求头
     headers = {"Cookie": "DedeUserID=" + configDict["cookies"]["DedeUserID"] +
                          "; SESSDATA=" + configDict["cookies"]["SESSDATA"] +
@@ -33,7 +38,7 @@ if __name__ == '__main__':
     name = myInfoBody["data"]["name"]
     print(f"uid：{uid} - 昵称：{name} - 确认存活，即将开始执行任务")
 
-    # 修补Cookie，视频分享需要buvid3，buvid4
+    # 补全Cookie，视频分享需要buvid3，buvid4
     cookieUrl = "https://api.bilibili.com/x/frontend/finger/spi"
     cookieBody = requests.get(url=cookieUrl, headers=headers).json()
     headers["Cookie"] += f"; buvid3={cookieBody['data']['b_3']}; buvid4={cookieBody['data']['b_4']}"
